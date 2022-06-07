@@ -1,0 +1,5 @@
+.idea
+Dockerfile
+output.txt
+leaguetable.egg-info
+leaguetable/__pycache__
