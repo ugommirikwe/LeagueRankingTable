@@ -43,6 +43,7 @@ def compute_league_table(scores: str):
 
     return dict(formatted_with_pts)
 
+
 @click.command()
 @click.option(
     "-f",
@@ -61,7 +62,6 @@ def compute_league_table(scores: str):
     "--file-output",
     help="File to write table to. Omit this flag to just display the league table on screen.",
     type=click.File("w", lazy=True),
-    default=sys.stdout,
 )
 def cli(scores_file, scores, file_output):
     """
@@ -72,18 +72,10 @@ def cli(scores_file, scores, file_output):
         click.echo("Error: You must either provide a scores file or enter score for each match with the '-s' or '--scores' option.")
         return
 
-    output = {}
-    if scores_file is not None:
-        output = compute_league_table(scores_file)
-    else:
-        output = compute_league_table(scores)
-
+    output = compute_league_table(scores_file if scores_file is not None else scores)
     table_formatted = str("\n".join(f'{index + 1}. {k}, {v:9}' for index, (k, v) in enumerate(output.items())))
     click.echo(f"League Table:\n\n{table_formatted}", file=file_output)
 
-def main():
-    cli()
 
 if __name__ == "__main__":
-    main()
-    
+    cli()

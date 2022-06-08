@@ -3,3 +3,4 @@ Dockerfile
 output.txt
 leaguetable.egg-info
 leaguetable/__pycache__
+.vscode
